@@ -29,7 +29,7 @@ public class Converter {
   }
 
   public static List<List<Integer>> multilineStringToIntListList(String input) {
-    return Stream.of(input.split("\n")).map(a -> Stream.of(a.split("( |\t)+")).map(Integer::valueOf).collect(Collectors.toList())).collect(Collectors.toList());
+    return Stream.of(input.split("\n")).map(a -> Stream.of(a.split("([ \t])+")).map(Integer::valueOf).collect(Collectors.toList())).collect(Collectors.toList());
   }
 
   public static List<String> multilineStringToStringList(String input) {
@@ -42,9 +42,7 @@ public class Converter {
 
     for (int i = 0; i < lines.length; i++) {
       String[] line = lines[i].split("");
-      for (int j = 0; j < lines[i].length(); j++) {
-        out[i][j] = line[j];
-      }
+      System.arraycopy(line, 0, out[i], 0, lines[i].length());
     }
     return out;
   }

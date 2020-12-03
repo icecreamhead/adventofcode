@@ -2,8 +2,6 @@ package com.icecreamhead.adventofcode.nineteen;
 
 import com.icecreamhead.adventofcode.util.Converter;
 
-import org.assertj.core.util.Lists;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class Tubes {
     System.out.println("Grid size: " + grid.length + "x" + grid[0].length + "=" + length);
   }
 
-  private static final List<String> PATHS = Lists.newArrayList("|", "-", "+", " ");
+  private static final List<String> PATHS = List.of("|", "-", "+", " ");
 
   public List<String> traverse() {
     long i = 0;

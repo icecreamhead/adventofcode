@@ -1,7 +1,5 @@
 package com.icecreamhead.adventofcode.three;
 
-import org.assertj.core.util.Lists;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -156,7 +154,7 @@ class Manhattan {
     }
   }
 
-  private static final List<int[]> MASKS = Lists.newArrayList(
+  private static final List<int[]> MASKS = List.of(
       new int[]{1, 0},
       new int[]{1, 1},
       new int[]{1, -1},

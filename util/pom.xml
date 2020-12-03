@@ -9,20 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>2017</artifactId>
+    <artifactId>util</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.icecreamhead.adventofcode</groupId>
-            <artifactId>util</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>
