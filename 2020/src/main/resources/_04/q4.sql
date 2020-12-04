@@ -31,7 +31,6 @@ from (
                 array_to_string(regexp_match(val, 'pid:(\d{9,})'), '')         pid
          from q4_vals
      ) passports
--- where length(hcl) = 1
 where byr between 1920 and 2002
   and iyr between 2010 and 2020
   and eyr between 2020 and 2030
@@ -39,4 +38,4 @@ where byr between 1920 and 2002
     or (right(hgt, 2) = 'in' and substr(hgt, 0, length(hgt) - 1)::int between 59 and 76))
   and hcl is not null
   and ecl in ('amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth')
-  and length(pid) = 9
+  and length(pid) = 9;
