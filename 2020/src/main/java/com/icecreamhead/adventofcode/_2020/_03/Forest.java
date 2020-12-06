@@ -13,7 +13,7 @@ public class Forest {
   private final byte[][] forest;
 
   public Forest(String inputFile) {
-    List<String> lines = InputLoader.load(inputFile);
+    List<String> lines = InputLoader.loadLines(inputFile);
     int h = lines.size();
     int w = lines.get(0).length();
     forest = new byte[h][w];

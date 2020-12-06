@@ -8,7 +8,7 @@ class InputLoaderTest {
 
   @Test
   void test() {
-    assertThat(InputLoader.load("test.txt"))
+    assertThat(InputLoader.loadLines("test.txt"))
         .containsExactly("line 1", "line 2", "line 3");
   }
 
