@@ -12,12 +12,11 @@ public class Boarding {
   public static void main(String[] args) {
 
     int[] seats = inputs.stream()
-        .map(input -> new StringBuilder(input).reverse())
         .mapToInt(input ->
-            Stream.iterate(0, i -> i < input.length(), i -> i + 1)
+            Stream.iterate(1, i -> i <= input.length(), i -> i + 1)
                 .mapToInt(i ->
-                    switch (input.charAt(i)) {
-                      case 'R', 'B' -> (int) Math.pow(2, i);
+                    switch (input.charAt(i - 1)) {
+                      case 'R', 'B' -> 1 << input.length() - i;
                       default -> 0;
                     })
                 .sum())
