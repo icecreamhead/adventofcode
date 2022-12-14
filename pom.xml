@@ -14,6 +14,7 @@
         <module>2017</module>
         <module>2020</module>
         <module>util</module>
+        <module>twentytwentytwo</module>
     </modules>
 
     <properties>

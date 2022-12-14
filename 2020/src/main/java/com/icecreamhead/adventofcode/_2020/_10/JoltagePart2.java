@@ -16,14 +16,15 @@ public class JoltagePart2 {
     long start = System.nanoTime();
 
     long[] jumps = new long[ADAPTORS.length];
+    jumps[0] = 1;
 
-    for (int i = 0; i < ADAPTORS.length; i++) {
+    for (int i = 1; i < ADAPTORS.length; i++) {
       long pathsToHere =
           (i - 3 >= 0 && ADAPTORS[i] - ADAPTORS[i - 3] <= 3 ? jumps[i - 3] : 0) +
               (i - 2 >= 0 && ADAPTORS[i] - ADAPTORS[i - 2] <= 3 ? jumps[i - 2] : 0) +
-              (i - 1 >= 0 && ADAPTORS[i] - ADAPTORS[i - 1] <= 3 ? jumps[i - 1] : 0);
+              (/*i - 1 >= 0 &&*/ ADAPTORS[i] - ADAPTORS[i - 1] <= 3 ? jumps[i - 1] : 0);
 
-      jumps[i] = Math.max(1, pathsToHere);
+      jumps[i] = pathsToHere;
     }
 
     long end = System.nanoTime() - start;
