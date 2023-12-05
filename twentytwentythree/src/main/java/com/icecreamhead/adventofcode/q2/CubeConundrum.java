@@ -1,5 +1,7 @@
 package com.icecreamhead.adventofcode.q2;
 
+import static java.lang.Math.max;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,7 +12,7 @@ class CubeConundrum {
     long part1(List<String> lines) {
         return resolveGames(lines)
                 .stream()
-                .filter(g -> g.isPossible(12, 13, 14))
+                .filter(Game::isPossible)
                 .mapToInt(Game::id)
                 .sum();
     }
@@ -18,11 +20,9 @@ class CubeConundrum {
     long part2(List<String> lines) {
         return resolveGames(lines)
                 .stream()
-                .mapToLong(g -> g.drawnCubes
+                .mapToLong(g -> g.drawnCubes()
                         .stream()
-                        .reduce((c1, c2) -> new DrawnCubes(
-                                Math.max(c1.red, c2.red), Math.max(c1.green, c2.green), Math.max(c1.blue, c2.blue)
-                        ))
+                        .reduce(DrawnCubes::merge)
                         .map(DrawnCubes::power)
                         .orElseThrow()
                 )
@@ -67,14 +67,17 @@ class CubeConundrum {
     }
 
     record Game(int id, Set<DrawnCubes> drawnCubes) {
-        boolean isPossible(int r, int g, int b) {
-            return drawnCubes.stream().allMatch(c -> c.red <= r && c.green <= g && c.blue <= b);
+        boolean isPossible() {
+            return drawnCubes.stream().allMatch(c -> c.red <= 12 && c.green <= 13 && c.blue <= 14);
         }
     }
 
     record DrawnCubes(int red, int green, int blue) {
         long power() {
             return (long) red * green * blue;
+        }
+        static DrawnCubes merge(DrawnCubes a, DrawnCubes b) {
+          return new DrawnCubes(max(a.red, b.red), max(a.green, b.green), max(a.blue, b.blue));
         }
     }
 }
