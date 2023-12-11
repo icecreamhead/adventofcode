@@ -25,4 +25,8 @@ class CosmicExpansionTest {
     assertThat(underTest.part2(SAMPLE, 10)).isEqualTo(1030);
     assertThat(underTest.part2(SAMPLE, 100)).isEqualTo(8410);
   }
+  @Test
+  void part2_puzzle() {
+    System.out.println(underTest.part2(PUZZLE, 1000000));
+  }
 }
