@@ -9,16 +9,15 @@ import java.util.Set;
 public class CosmicExpansion {
 
   long part1(char[][] input) {
-//    printGrid(input);
+    Set<Integer> emptyRows = new HashSet<>();
+    Set<Integer> emptyCols = new HashSet<>();
 
     for (int rowi = 0; rowi < input.length; rowi++) {
       char[] row = input[rowi];
       if (allEmpty(row)) {
-        input = duplicateRow(input, rowi, 1);
-        rowi++;
+        emptyRows.add(rowi);
       }
     }
-//    printGrid(input);
 
     for (int coli = 0; coli < input[0].length; coli++) {
       boolean allBlank = true;
@@ -29,13 +28,13 @@ public class CosmicExpansion {
         }
       }
       if (allBlank) {
-        input = duplicateCol(input, coli, 1);
-        coli++;
+        emptyCols.add(coli);
       }
     }
-//    printGrid(input);
 
-    return calculateDistances(input);
+    System.out.printf("Empty rows: %s Empty cols: %s", emptyRows, emptyCols);
+
+    return calculateDistances(input, emptyRows, emptyCols, 1);
   }
 
   long part2(char[][] input, int expansion) {
@@ -65,10 +64,10 @@ public class CosmicExpansion {
     }
 //    printGrid(input);
 
-    return calculateDistances(input);
+    return calculateDistances(input, null,null, 1);
   }
 
-  private long calculateDistances(char[][] input) {
+  private long calculateDistances(char[][] input, Set<Integer> emptyRows, Set<Integer> emptyCols, long mulitiplier) {
     List<Coord> galaxies = new ArrayList<>();
 
     for (int row = 0; row < input.length; row++) {
@@ -80,7 +79,16 @@ public class CosmicExpansion {
     long total = 0;
     for (Coord galaxy1 : galaxies) {
       for (Coord galaxy2 : galaxies) {
-        if (!galaxy1.equals(galaxy2)) total += (Math.abs(galaxy1.x - galaxy2.x) + Math.abs(galaxy1.y - galaxy2.y));
+        if (!galaxy1.equals(galaxy2)) {
+          int minX = Math.min(galaxy1.x, galaxy2.x);
+          int maxX = Math.max(galaxy1.x, galaxy2.x);
+          int minY = Math.min(galaxy1.y, galaxy2.y);
+          int maxY = Math.max(galaxy1.y, galaxy2.y);
+          long xVoids = emptyCols.stream().filter(x -> x > minX && x < maxX).count();
+          long yVoids = emptyCols.stream().filter(y -> y > minY && y < maxY).count();
+          // maxX - minX - xVoids + (multiplier * xVoids) + same again for y
+          total += (Math.abs(galaxy1.x - galaxy2.x) + Math.abs(galaxy1.y - galaxy2.y));
+        }
       }
     }
 
