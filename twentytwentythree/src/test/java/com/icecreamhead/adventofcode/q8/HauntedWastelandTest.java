@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.icecreamhead.adventofcode.util.InputLoader;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class HauntedWastelandTest {
@@ -28,6 +29,7 @@ class HauntedWastelandTest {
     assertThat(underTest.steps2(sample2)).isEqualTo(6);
   }
   @Test
+  @Disabled
   void part2_puzzle() throws InterruptedException {
     System.out.println(underTest.steps2(puzzle));
   }
