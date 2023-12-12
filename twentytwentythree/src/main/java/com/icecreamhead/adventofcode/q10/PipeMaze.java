@@ -1,6 +1,8 @@
 package com.icecreamhead.adventofcode.q10;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PipeMaze {
 
@@ -20,6 +22,45 @@ public class PipeMaze {
 
 
         return x % 2 == 0 ? x / 2 : (x + 1) / 2;
+    }
+
+    long part2(char[][] input) {
+
+        Set<Pos> pipes = new HashSet<>();
+        Pos pos = findStart(input);
+        pipes.add(pos);
+
+        long x = 0;
+        Pos prev = null, tmp = null;
+        do {
+            tmp = pos;
+            pos = pos.next(prev, input);
+            pipes.add(pos);
+            prev = tmp;
+//            System.out.println(pos);
+            x++;
+        } while (pos.tile != 'S');
+
+        int count = 0;
+        int pipesCrossed = 0;
+        for (int rowi = 0; rowi < input.length; rowi++) {
+            for (int coli = 0; coli < input[rowi].length; coli++) {
+                int y_ = rowi, x_ = coli;
+                char tile = input[y_][x_];
+                if (pipes.stream().anyMatch(p -> p.x == x_ && p.y == y_)) {
+                    if (tile == '|' || tile == 'F' || tile == 'J' || tile == '7' || tile == 'L') {
+                        System.out.printf("Inc pipesCrossed %s(%d,%d)%n", tile, x_,y_);
+                        pipesCrossed++;
+                    }
+                } else if (pipesCrossed % 2 == 1) {
+                    System.out.printf("Adding %s(%d,%d)%n", tile, x_, y_);
+                    count++;
+                }
+            }
+        }
+
+
+        return count;
     }
 
     private static Pos findStart(char[][] input) {
@@ -56,9 +97,6 @@ public class PipeMaze {
                         prev.x == x - 1 && prev.y == y ? new Pos(tiles[y + 1][x], x, y + 1) : new Pos(tiles[y][x - 1], x - 1, y);
                 default -> throw new IllegalStateException();
             };
-
-
-//            throw new IllegalStateException();
         }
     }
 }
