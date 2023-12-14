@@ -28,4 +28,8 @@ class PipeMazeTest {
         assertThat(underTest.part2(SAMPLE)).isEqualTo(1);
         assertThat(underTest.part2(SAMPLE2)).isEqualTo(8);
     }
+    @Test
+    void part2_puzzle() {
+        System.out.println(underTest.part2(PUZZLE));
+    }
 }
