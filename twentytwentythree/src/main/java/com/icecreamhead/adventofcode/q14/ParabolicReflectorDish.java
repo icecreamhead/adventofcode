@@ -39,9 +39,12 @@ public class ParabolicReflectorDish {
         if (anchor2Ix != -1 && anchor1Ix != -1 && anchor1 == lE && anchor2 == lE && !jumpedToWarpSpeed) {
           long period = anchor2Ix - anchor1Ix;
           System.out.printf("%d:%d %d:%d %d:%d ==> period is %d%n", anchor1Ix, anchor1, anchor2Ix, anchor2, i, lE, anchor2Ix - anchor1Ix);
-          long jump = period * (((1_000_000_000 - 1000) / period) - period);
-          System.out.printf("Adding %d to i (%d => %d)%n", jump, i, i + jump);
-          i += jump;
+//          long jump = period * (((1_000_000_000 - 1000) / period) - period);
+//          System.out.printf("Adding %d to i (%d => %d)%n", jump, i, i + jump);
+//          i += jump;
+          while (i < 1_000_000_000) i += period;
+          i -= period;
+          System.out.println("Fast-forwarded to end! i is now " + i);
           jumpedToWarpSpeed = true;
         } else if (anchor2Ix == -1 && anchor1 == lE) {
           anchor2Ix = i;
