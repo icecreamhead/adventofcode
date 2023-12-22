@@ -56,6 +56,7 @@ public class PipeMaze {
 
     for (int rowi = 0; rowi < input.length; rowi++) {
       char entryCorner = '!';
+//      System.out.println(new String(input[rowi]));
 //      System.out.printf("%s ", new String(input[rowi]));
       for (int coli = 0; coli < input[rowi].length; coli++) {
         int y_ = rowi, x_ = coli;
@@ -67,21 +68,26 @@ public class PipeMaze {
         }
 //        System.out.print(isPipe ? "#" : "-");
         if (isPipe) {
-          System.out.print(tile);
+//          System.out.print(tile);
           if (tile == '|' || (entryCorner == 'F' && tile == 'J') || (entryCorner == 'L' && tile == '7')) {
 //                        System.err.printf("Inc pipesCrossed %s(%d,%d) [%s]%n", tile, x_,y_, entryCorner);
             entryCorner = '!';
             inside = !inside;
+//            System.out.println(" => "+ (inside?"inside":"outside"));
+          } else if ((entryCorner == 'F' && tile == '7') || (entryCorner == 'L' && tile == 'J')) {
+            entryCorner = '!';
+//            System.out.println(" => "+ (inside?"inside":"outside"));
           }
         } else if (inside) {
 //                    System.out.printf("Adding %s(%d,%d)%n", tile, x_, y_);
-          System.out.print("o");
+//          System.out.print("o");
           count++;
-        } else {
-          System.out.print(".");
         }
+//        else {
+//          System.out.print(".");
+//        }
       }
-      System.out.println();
+//      System.out.println();
     }
 
     return count;

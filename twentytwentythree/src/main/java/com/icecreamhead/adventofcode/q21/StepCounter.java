@@ -44,8 +44,8 @@ public class StepCounter {
   private Set<Pos> findPositionsP2(char[][] map, Set<Pos> currentPositions, int remainingSteps, LocalTime last) {
     if (remainingSteps == 0) return currentPositions;
     LocalTime now = LocalTime.now();
-    Duration expected = Duration.ofNanos((now.toNanoOfDay() - last.toNanoOfDay()) * remainingSteps);
-    System.out.println(remainingSteps + ": " + last + " => " + now + " Expected " + now.plus(expected) + " (" + DurationFormatUtils.formatDurationHMS(expected.toMillis()) + ")");
+//    Duration expected = Duration.ofNanos((now.toNanoOfDay() - last.toNanoOfDay()) * remainingSteps);
+//    System.out.println(remainingSteps + ": " + last + " => " + now + " Expected " + now.plus(expected) + " (" + DurationFormatUtils.formatDurationHMS(expected.toMillis()) + ")");
 
     HashSet<Pos> positions = new HashSet<>();
 

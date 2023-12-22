@@ -21,4 +21,12 @@ class PointOfIncidenceTest {
   void part1_puzzle() {
     System.out.println(underTest.part1(PUZZLE));
   }
+  @Test
+  void part2_sample() {
+    assertThat(underTest.part2(SAMPLE)).isEqualTo(400);
+  }
+  @Test
+  void part2_puzzle() {
+    System.out.println(underTest.part2(PUZZLE));
+  }
 }

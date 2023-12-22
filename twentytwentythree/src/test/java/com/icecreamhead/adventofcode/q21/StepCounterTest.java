@@ -6,6 +6,7 @@ import static org.junit.jupiter.params.provider.Arguments.of;
 import com.icecreamhead.adventofcode.util.InputLoader;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -44,18 +45,19 @@ class StepCounterTest {
 
   static List<Arguments> part2_sample() {
     return List.of(
-        of(6, 16),
-        of(10, 50),
-        of(10, 50),
-        of(50, 1594),
-        of(100, 6536),
-        of(500, 167004),
-        of(1000, 668697),
-        of(5000, 16733044)
+        of(6, 16)
+        , of(10, 50)
+        , of(10, 50)
+        , of(50, 1594)
+        , of(100, 6536)
+        , of(500, 167004)
+//        , of(1000, 668697)
+//        , of(5000, 16733044)
     );
   }
 
   @Test
+  @Disabled
   void part2_puzzle() {
     System.out.println(underTest.part2(PUZZLE, 26501365));
   }

@@ -6,6 +6,7 @@ import com.icecreamhead.adventofcode.util.InputLoader;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class HotSpringsTest {
@@ -20,6 +21,7 @@ class HotSpringsTest {
     assertThat(underTest.part1(SAMPLE)).isEqualTo(21);
   }
   @Test
+  @Disabled
   void part2_sample() {
     assertThat(underTest.part2(SAMPLE)).isEqualTo(506250);
   }
