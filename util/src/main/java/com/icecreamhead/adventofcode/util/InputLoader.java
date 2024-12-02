@@ -33,6 +33,10 @@ public final class InputLoader {
     return loadGrid(loadLines(resourceName));
   }
 
+  public static int[][] loadIntGrid(String resourceName) {
+    return loadIntGrid(loadLines(resourceName));
+  }
+
   public static List<char[][]> loadListOfGrids(String resourceName) {
     String input = loadString(resourceName);
     String[] patterns = input.split("\n\n");
@@ -49,6 +53,19 @@ public final class InputLoader {
     char[][] grid = new char[h][w];
     for (int y = 0; y < lines.size(); y++) {
       grid[y] = lines.get(y).toCharArray();
+    }
+    return grid;
+  }
+
+  private static int[][] loadIntGrid(List<String> lines) {
+    int h = lines.size();
+    int w = lines.get(0).split(" ").length;
+    int[][] grid = new int[h][w];
+    for (int y = 0; y < lines.size(); y++) {
+      String[] ints = lines.get(y).split(" ");
+      for (int x = 0; x < w; x++) {
+        grid[y][x] = Integer.parseInt(ints[x].trim());
+      }
     }
     return grid;
   }

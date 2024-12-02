@@ -16,6 +16,7 @@
         <module>util</module>
         <module>twentytwentytwo</module>
       <module>twentytwentythree</module>
+      <module>twentytwentyfour</module>
     </modules>
 
     <properties>
