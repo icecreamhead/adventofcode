@@ -23,13 +23,13 @@ class MullItOverTest {
   }
 
   @Test
-  void pt2_sample() {
+  void p2_sample() {
     String sample = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
-    assertThat(underTest.pt2(sample)).isEqualTo(48);
+    assertThat(underTest.p2(sample)).isEqualTo(48);
   }
 
   @Test
-  void pt2_puzzle() {
-    System.out.println(underTest.pt2(InputLoader.loadString("q3/puzzle.txt")));
+  void p2_puzzle() {
+    System.out.println(underTest.p2(InputLoader.loadString("q3/puzzle.txt")));
   }
 }
