@@ -6,11 +6,7 @@ import java.util.regex.Pattern;
 public class MullItOver {
 
   long pt1(String input) {
-    return pt1(Pattern.compile("(mul\\((\\d+),(\\d+)\\))").matcher(input));
-  }
-
-  private long pt1(Matcher matcher) {
-    return matcher.find() ? Long.parseLong(matcher.group(2)) * Long.parseLong(matcher.group(3)) + pt1(matcher) : 0;
+    return Pattern.compile("(mul\\((\\d+),(\\d+)\\))").matcher(input).results().reduce(0L, (a, b) -> a + Long.parseLong(b.group(2)) * Long.parseLong(b.group(3)), Long::sum);
   }
 
   long p2(String input) {
