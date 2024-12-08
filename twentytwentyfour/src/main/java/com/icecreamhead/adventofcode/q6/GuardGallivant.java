@@ -1,6 +1,5 @@
 package com.icecreamhead.adventofcode.q6;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -95,7 +94,7 @@ public class GuardGallivant {
           x = nextx;
           y = nexty;
           been.add(new P(g, x, y));
-          if (newPathIntersectsExistingPath(been, map, rotate90(g), x, y)) {
+          if (newPathIntersectsExistingPath(been, map, rotate90(g), x, y, false)) {
             switch (g) {
               case UP -> blocks.add(new P('O', x, y - 1));
               case RIGHT -> blocks.add(new P('O', x + 1, y));
@@ -120,11 +119,18 @@ public class GuardGallivant {
     return blocks.size();
   }
 
-  private static boolean newPathIntersectsExistingPath(Set<P> been, char[][] map, char g, int x, int y) {
+  private static boolean newPathIntersectsExistingPath(Set<P> been, char[][] map, char g, int x, int y, boolean alreadyRecursed) {
     while (true) {
 //      print(map, g, x, y);
+
       try {
-        if (map[y][x] == '#') return false; // need to recurse here
+        if (map[y][x] == '#' && !alreadyRecursed) return switch (g) {
+          case UP -> newPathIntersectsExistingPath(been, map, rotate90(g), x, y + 1, true);
+          case DOWN -> newPathIntersectsExistingPath(been, map, rotate90(g), x, y - 1, true);
+          case LEFT -> newPathIntersectsExistingPath(been, map, rotate90(g), x + 1, y, true);
+          case RIGHT -> newPathIntersectsExistingPath(been, map, rotate90(g), x - 1, y, true);
+          default -> throw new IllegalStateException("Illegal g: " + g);
+        };
       } catch (ArrayIndexOutOfBoundsException e) {
 //        System.err.println(e);
         return false;

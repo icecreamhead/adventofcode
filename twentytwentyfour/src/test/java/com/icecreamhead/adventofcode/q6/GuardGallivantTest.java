@@ -26,6 +26,11 @@ class GuardGallivantTest {
   }
 
   @Test
+  void pt2_sample2() {
+    assertThat(underTest.pt2(InputLoader.loadGrid("q6/sample2.txt"))).isEqualTo(2);
+  }
+
+  @Test
   void pt2_puzzle() {
     System.out.println(underTest.pt2(InputLoader.loadGrid("q6/puzzle.txt")));
   }
