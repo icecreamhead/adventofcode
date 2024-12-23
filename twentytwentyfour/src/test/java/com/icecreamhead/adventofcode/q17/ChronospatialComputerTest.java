@@ -41,7 +41,7 @@ class ChronospatialComputerTest {
 
   @Test
   void p2_experiment()  {
-    System.out.println(p2recurse(0, 0, puzzle).orElseThrow());
+    //System.out.println(p2recurse(0, 0, puzzle).orElseThrow());
   }
 
 //  private long p2(String input) throws InterruptedException {
