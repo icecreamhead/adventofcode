@@ -27,18 +27,23 @@ public class LanParty {
     buildMap(input);
     buildNetworks(connections.size());
 
-   return distinctNetworks.stream().max(Comparator.comparingInt(Set::size)).orElseThrow().stream().sorted().collect(Collectors.joining(","));
+   return distinctNetworks.stream()
+       .max(Comparator.comparingInt(Set::size))
+       .orElseThrow()
+       .stream()
+       .sorted()
+       .collect(Collectors.joining(","));
   }
 
   private void buildNetworks(int reqSize) {
-    int c, a;
+    int before, after;
     do {
-      int current = distinctNetworks.stream().max(Comparator.comparingInt(Set::size)).map(Set::size).orElse(0);
-      System.out.printf("current=%d %s%n", current, distinctNetworks.stream().max(Comparator.comparingInt(Set::size)).orElseThrow().stream().sorted().collect(Collectors.joining(",")));
-      c = current;
+      int currentBiggest = distinctNetworks.stream().max(Comparator.comparingInt(Set::size)).map(Set::size).orElse(0);
+      System.out.printf("current=%d %s%n", currentBiggest, distinctNetworks.stream().max(Comparator.comparingInt(Set::size)).orElseThrow().stream().sorted().collect(Collectors.joining(",")));
+      before = currentBiggest;
 
       Set<Set<String>> networksToAdd = new HashSet<>();
-      for (Set<String> distinctNetwork : distinctNetworks.stream().filter(nw -> nw.size() == current).collect(Collectors.toSet())) {
+      for (Set<String> distinctNetwork : distinctNetworks.stream().filter(nw -> nw.size() == currentBiggest).collect(Collectors.toSet())) {
         distinctNetwork.stream()
             .map(node -> connections.get(node).stream().filter(dest -> !distinctNetwork.contains(dest)).collect(Collectors.toSet()))
             .reduce((set1, set2) -> set1.stream().filter(set2::contains).collect(Collectors.toSet()))
@@ -51,8 +56,8 @@ public class LanParty {
       }
       distinctNetworks.addAll(networksToAdd);
 
-      a = distinctNetworks.stream().max(Comparator.comparingInt(Set::size)).map(Set::size).orElse(0);
-    } while (c != a && c <= reqSize);
+      after = distinctNetworks.stream().max(Comparator.comparingInt(Set::size)).map(Set::size).orElse(0);
+    } while (before != after && before <= reqSize);
   }
 
   private void buildMap(List<String> input) {
