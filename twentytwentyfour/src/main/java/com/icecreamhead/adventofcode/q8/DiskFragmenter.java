@@ -1,5 +1,6 @@
 package com.icecreamhead.adventofcode.q8;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class DiskFragmenter {
@@ -17,14 +18,17 @@ public class DiskFragmenter {
   }
 
   static long checksum(int[] blocks) {
-    int i = 0;
     long t = 0;
-    System.out.printf("length: %d\n", blocks.length);
-    while (i < blocks.length) {
+    int max = -1;
+//    System.out.printf("length: %d\n", blocks.length);
+    for (int i = 0; i < blocks.length; i++) {
       if (blocks[i] != -1) {
+        max = Math.max(max, blocks[i]);
+        if (blocks[i] < -1) {
+          throw new IllegalStateException(blocks[i] + " is out of range");
+        }
         t += blocks[i] * (long) i;
       }
-      i++;
     }
     return t;
   }
@@ -49,21 +53,22 @@ public class DiskFragmenter {
     int r = blocks.length - 1;
     while (r >= 0) {
 
+//      System.out.println(Arrays.toString(blocks));
       if (blocks[r] == -1) {
         r--;
       } else {
         int rstart = r;
         int val = blocks[r];
         while (r >= 0 && blocks[r] == val) {
-          System.out.printf("block[%d] is %d\n", r, blocks[r]);
+//          System.out.printf("block[%d] is %d\n", r, blocks[r]);
           r--;
         }
         int rlen = rstart - r;
 
-                System.out.printf("len of %d is %d\n", val, rlen);
+//        System.out.printf("len of %d is %d\n", val, rlen);
 
         int emptySpace = findEmptySpaceOfSize(blocks, rlen, r);
-        System.out.println("empty space: " + emptySpace + " (started at " + 0 + ")");
+//        System.out.println(emptySpace != -1 ? "placing file at index: " + emptySpace : "no space found");
 
         if (emptySpace != -1) {
           for (int i = 0; i < rlen; i++) {
@@ -82,13 +87,15 @@ public class DiskFragmenter {
 
       if (blocks[i] == -1) {
         int blockstart = i;
-        while (i < max && blocks[i] != -1) {
-          System.out.printf("block[%d] is %d\n", i, blocks[i]);
+        while (i < max && blocks[i] == -1) {
+//          System.out.printf("block[%d] is %d\n", i, blocks[i]);
           i++;
         }
-        int foundlen = 1 + i - blockstart;
-        System.out.printf("foundlen: %d\n", foundlen);
-        if (foundlen >= reqlen) return blockstart;
+        int foundlen = i - blockstart;
+        if (foundlen >= reqlen) {
+//          System.out.printf("foundlen: %d-%d=%d\n", i, blockstart, foundlen);
+          return blockstart;
+        }
       }
 
     }

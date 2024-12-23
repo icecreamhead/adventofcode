@@ -30,8 +30,8 @@ class DiskFragmenterTest {
   @Test
   void compactFiles() {
     int[] c = new int[]{0, -1, 1, -1, 2, -1, 3, -1, 4, -1, 5, -1, 6, -1, 7, -1, 8, -1, 9, -1, 10, -1};
-//    DiskFragmenter.compactFiles(c);
-//    assertThat(c).isEqualTo(new int[]{0, 10, 1, 9, 2, 8, 3, 7, 4, 6, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1});
+    DiskFragmenter.compactFiles(c);
+    assertThat(c).isEqualTo(new int[]{0, 10, 1, 9, 2, 8, 3, 7, 4, 6, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1});
 
     int[] b = new int[]{0, -1, -1, -1, 1, -1, -1, 2, -1, 3, 4, 6, 6, 5, 5, 5};
     DiskFragmenter.compactFiles(b);
@@ -57,10 +57,19 @@ class DiskFragmenterTest {
   @Test
   void pt2_sample() {
     assertThat(underTest.pt2("2333133121414131402")).isEqualTo(2858);
+    assertThat(underTest.pt2("1111111111111111111111")).isEqualTo(290);
   }
 
   @Test
   void pt2_puzzle() {
-    System.out.println(underTest.pt2(InputLoader.loadString("q8/puzzle.txt")));
+    String in = InputLoader.loadString("q8/puzzle.txt");
+    assertThat(in.length()).isEqualTo(19_999);
+    System.out.println(underTest.pt2(in));
+  }
+
+  @Test
+  void pt2_puzzle2() {
+    String in = InputLoader.loadString("q8/puzzle2.txt");
+    assertThat(underTest.pt2(in)).isEqualTo(6335972980679L);
   }
 }
